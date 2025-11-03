@@ -14,7 +14,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100svh;
+    height: max-content;
+    min-height: 100svh;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
@@ -48,8 +49,6 @@ body {
         gap: 1pc;
         width: 100%;
         height: max-content;
-        overflow-x: hidden;
-        overflow-y: auto;
 
         .el {
             position: relative;
@@ -129,10 +128,6 @@ body {
         .el.active::before {
             width: 110%;
         }
-    }
-
-    .to-do-card::-webkit-scrollbar {
-        width: 0;
     }
 }
 
