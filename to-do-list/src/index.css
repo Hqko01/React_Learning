@@ -1,13 +1,148 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+    width: max-content;
+    height: max-content;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100svh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: black;
+    color: white;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    max-width: 450px;
+    height: 100%;
+    overflow-y: auto;
+
+    gap: 2pc;
+
+    .title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .to-do-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        gap: 1pc;
+        width: 100%;
+        height: max-content;
+
+        .el {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1pc;
+            width: 100%;
+            padding: 1pc;
+            border: 1px solid rgb(61, 61, 61);
+            border-radius: .5pc;
+            transition: .4s ease;
+
+            .to-do-name {
+                flex: 1;
+
+                p {
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                }
+            }
+
+            .to-do-checker {
+                position: relative;
+                height: 100%;
+                aspect-ratio: 1/1;
+                padding: 1pc;
+                border: 1.5px solid rgb(138, 138, 138);
+                border-radius: 1pc;
+                overflow: hidden;
+                cursor: pointer;
+                transition: .2s ease;
+            }
+
+            .to-do-checker::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+                width: 0;
+                height: 0;
+                border: 2px solid white;
+                border-top-color: transparent;
+                border-left-color: transparent;
+                border-radius: .1pc;
+                transition: .2s ease;
+                opacity: 0;
+            }
+        }
+
+        .el.active {
+            opacity: .6;
+
+            .to-do-checker::before {
+                opacity: 1;
+                animation: tick .7s ease both;
+            }
+        }
+
+        .el::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background-color: rgb(101, 255, 101);
+            box-shadow: 0 0 7px 1px rgb(127, 255, 127);
+            border-radius: 1pc;
+            z-index: 2;
+            transition: .7s ease;
+        }
+
+        .el.active::before {
+            width: 110%;
+        }
+    }
+}
+
+@keyframes tick {
+    0% {
+        width: 0;
+        height: 0;
+    }
+
+    50% {
+        width: 5px;
+    }
+
+    100% {
+        width: 5px;
+        height: 15px;
+    }
 }
