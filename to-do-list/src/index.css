@@ -32,7 +32,6 @@ body {
     width: 95%;
     max-width: 450px;
     height: 100%;
-    overflow-y: auto;
 
     gap: 2pc;
 
@@ -49,6 +48,8 @@ body {
         gap: 1pc;
         width: 100%;
         height: max-content;
+        overflow-x: hidden;
+        overflow-y: auto;
 
         .el {
             position: relative;
@@ -128,6 +129,10 @@ body {
         .el.active::before {
             width: 110%;
         }
+    }
+
+    .to-do-card::-webkit-scrollbar {
+        width: 0;
     }
 }
 
