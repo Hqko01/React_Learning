@@ -25,7 +25,7 @@ body {
     color: white;
 }
 
-.App {
+.card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,82 +51,138 @@ body {
         height: max-content;
 
         .el {
-            position: relative;
             display: flex;
-            flex-direction: row;
+            flex-direction: row-reverse;
             align-items: center;
             justify-content: space-between;
-            gap: 1pc;
             width: 100%;
-            padding: 1pc;
-            border: 1px solid rgb(61, 61, 61);
-            border-radius: .5pc;
             transition: .4s ease;
 
-            .to-do-name {
+            .el-output {
+                position: relative;
                 flex: 1;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1pc;
+                border: 1px solid rgb(61, 61, 61);
+                border-radius: .5pc;
+                transition: .4s ease;
 
-                p {
-                    font-size: 1.1rem;
-                    font-weight: 500;
+                .to-do-name {
+                    flex: 1;
+
+                    p {
+                        font-size: 1.1rem;
+                        font-weight: 500;
+                    }
+                }
+
+                .to-do-checker {
+                    position: relative;
+                    height: 100%;
+                    aspect-ratio: 1/1;
+                    padding: 1pc;
+                    border: 1.5px solid rgb(138, 138, 138);
+                    border-radius: 1pc;
+                    overflow: hidden;
+                    cursor: pointer;
+                    transition: .2s ease;
+                }
+
+                .to-do-checker::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) rotate(45deg);
+                    width: 0;
+                    height: 0;
+                    border: 2px solid white;
+                    border-top-color: transparent;
+                    border-left-color: transparent;
+                    border-radius: .1pc;
+                    transition: .2s ease;
+                    opacity: 0;
                 }
             }
 
-            .to-do-checker {
-                position: relative;
-                height: 100%;
-                aspect-ratio: 1/1;
-                padding: 1pc;
-                border: 1.5px solid rgb(138, 138, 138);
-                border-radius: 1pc;
-                overflow: hidden;
-                cursor: pointer;
-                transition: .2s ease;
-            }
-
-            .to-do-checker::before {
+            .el-output::before {
                 content: '';
                 position: absolute;
                 top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) rotate(45deg);
+                left: -5%;
+                transform: translateY(-50%);
                 width: 0;
-                height: 0;
-                border: 2px solid white;
-                border-top-color: transparent;
-                border-left-color: transparent;
-                border-radius: .1pc;
-                transition: .2s ease;
-                opacity: 0;
+                height: 2px;
+                background-color: rgb(101, 255, 101);
+                box-shadow: 0 0 7px 1px rgb(127, 255, 127);
+                border-radius: 1pc;
+                z-index: 2;
+                transition: .7s ease;
+            }
+
+            #delete-el {
+                width: 0;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+                border: 0px solid rgb(190, 47, 47);
+                margin-left: 0;
+                border-radius: 1pc;
+                cursor: pointer;
+                z-index: 2;
+                transition: .4s ease;
+                user-select: none;
+
+                svg {
+                    width: 1.45rem;
+                    height: 1.45rem;
+
+                    path {
+                        transition: .2s ease;
+                        stroke: rgb(190, 47, 47);
+                    }
+                }
+            }
+
+            #delete-el:hover {
+                background-color: rgba(255, 255, 255, 0.13);
+
+                svg path {
+                    stroke: white;
+                }
+            }
+
+            #delete-el:active {
+                transition: .1s ease;
+                transform: scale(.98);
             }
         }
 
         .el.active {
-            opacity: .6;
-
             .to-do-checker::before {
                 opacity: 1;
                 animation: tick .7s ease both;
             }
-        }
 
-        .el::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -5%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 2px;
-            background-color: rgb(101, 255, 101);
-            box-shadow: 0 0 7px 1px rgb(127, 255, 127);
-            border-radius: 1pc;
-            z-index: 2;
-            transition: .7s ease;
-        }
+            .el-output {
+                opacity: .6;
+            }
 
-        .el.active::before {
-            width: 110%;
+            .el-output::before {
+                width: 110%;
+            }
+
+            #delete-el {
+                width: 40px;
+                border-width: 2px;
+                padding: .5pc;
+                margin-left: 1.4pc;
+            }
         }
     }
 }
@@ -145,4 +201,35 @@ body {
         width: 5px;
         height: 15px;
     }
+}
+
+#add-button {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 1pc;
+    bottom: 1pc;
+    border-radius: 50%;
+    background: linear-gradient(-45deg, rgb(255, 77, 202), rgb(255, 177, 255));
+    box-shadow: 0 0 5px 1px rgb(255, 177, 255);
+    padding: .25pc;
+    transition: .2s ease;
+    cursor: pointer;
+    user-select: none;
+
+    svg {
+        width: 2.4rem;
+        height: 2.4rem;
+        fill: white;
+    }
+}
+
+#add-button:hover {
+    background-color: rgba(255, 255, 255, 0.13);
+}
+
+#add-button:active {
+    transition: .1s ease;
+    transform: scale(.98);
 }
